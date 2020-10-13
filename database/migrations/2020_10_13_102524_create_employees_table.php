@@ -19,17 +19,17 @@ class CreateEmployeesTable extends Migration
             $table->string('firstname')->default('');
             $table->string('midname')->default('');
             $table->date('dob');
-            $table->date('date_hired');
+            $table->date('date_hired')->nullable()->default('null');
             $table->boolean('is_available')->default(true);
             $table->enum('emp_status', ['PROBY', 'REG']);
             $table->enum('civil_status', ['SINGLE', 'MARRIED', 'LEGALLY SEPARATED', 'DIVORCED', 'WIDOW/ER']);
             $table->string('address1');
-            $table->string('address2');
+            $table->string('address2')->nullable()->default('');
             $table->string('email');
             $table->string('phone');
-            $table->char('sss_num', 15);
-            $table->char('tin', 15);
-            $table->char('pagibig', 15);
+            $table->char('sss_num', 15)->nullable()->default('');
+            $table->char('tin', 15)->nullable()->default('');
+            $table->char('pagibig', 15)->nullable()->default('');
             $table->timestamps();
         });
     }
