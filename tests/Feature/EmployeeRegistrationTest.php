@@ -42,8 +42,6 @@ class EmployeeRegistrationTest extends TestCase
     /** @test */
     public function an_employee_can_be_updated()
     {
-        $this->withoutExceptionHandling();
-
         $this->post('/employees', [
             'lastname' => 'Yobomo',
             'firstname' => 'Hortag',
@@ -94,6 +92,40 @@ class EmployeeRegistrationTest extends TestCase
         $this->assertEquals('SINGLE', $employee->civil_status);
         $this->assertEquals('Brgy Ginebra', $employee->address1);
         $this->assertEquals('Cebu City', $employee->address2);
+    }
+
+    /** @test */
+    public function an_employee_can_be_deleted()
+    {
+        // Insert a record
+        $this->post('/employees', [
+            'lastname' => 'Yobomo',
+            'firstname' => 'Hortag',
+            'midname' => 'Ozmo',
+            'dob' => '1983-10-13',
+            'date_hired' => '2018-11-23',
+            'is_available' => true,
+            'emp_status' => 'REG',
+            'civil_status' => 'MARRIED',
+            'address1' => 'Brgy Mabolo',
+            'address2' => 'Cebu City',
+            'email' => 'Hortagb@codev.com',
+            'phone' => '09871234561',
+            'sss_num' => '61450122',
+            'tin' => '895632541',
+            'pagibig' => '1000325652',
+        ]);
+
+        // Get the inserted record
+        $employee = Employee::first();
+
+        // This statement is optional, but since the Victor the YouTuber is doing it
+        $this->assertCount(1, Employee::all());
+
+        // Delete the record
+        $response = $this->delete('/employees/' . $employee->id);
+
+        $this->assertCount(0, Employee::all());
     }
 
     /** @test */

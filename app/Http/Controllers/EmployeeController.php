@@ -18,6 +18,11 @@ class EmployeeController extends Controller
         $employee->update($this->validateRequest());
     }
 
+    public function destroy(Employee $employee)
+    {
+        $employee->delete();
+    }
+
     protected function validateRequest()
     {
         return request()->validate([
