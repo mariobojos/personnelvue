@@ -34,9 +34,11 @@ class EmployeeRegistrationTest extends TestCase
             'pagibig' => '1000325652',
         ]);
 
-        $response->assertOk();
+        //$response->assertOk();
+        $employee = Employee::first();
 
         $this->assertCount(1, Employee::all());
+        $response->assertRedirect('/employees/' . $employee->id);
     }
 
     /** @test */
@@ -92,6 +94,7 @@ class EmployeeRegistrationTest extends TestCase
         $this->assertEquals('SINGLE', $employee->civil_status);
         $this->assertEquals('Brgy Ginebra', $employee->address1);
         $this->assertEquals('Cebu City', $employee->address2);
+        $response->assertRedirect('/employees/' . $employee->id);
     }
 
     /** @test */
@@ -126,6 +129,7 @@ class EmployeeRegistrationTest extends TestCase
         $response = $this->delete('/employees/' . $employee->id);
 
         $this->assertCount(0, Employee::all());
+        $response->assertRedirect('/employees');
     }
 
     /** @test */
@@ -502,7 +506,10 @@ class EmployeeRegistrationTest extends TestCase
             'pagibig' => '1000325652',
         ]);
 
-        $response->assertOk();
+        // $response->assertOk();
+        $employee = Employee::first();
+        // Test if it actually redirects after an Insert operation
+        $response->assertRedirect('/employees/' . $employee->id);
     }
 
     /** @test */
@@ -529,7 +536,10 @@ class EmployeeRegistrationTest extends TestCase
         ]);
 
         // $response->assertSessionHasErrors('date_hired');
-        $response->assertOk();
+        // $response->assertOk();
+        $employee = Employee::first();
+        // Test if it actually redirects after an Insert operation
+        $response->assertRedirect('/employees/' . $employee->id);
     }
 
     /** @test */

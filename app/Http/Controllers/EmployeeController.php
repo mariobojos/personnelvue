@@ -10,17 +10,21 @@ class EmployeeController extends Controller
 {
     public function store()
     {
-        Employee::create($this->validateRequest());
+        $employee = Employee::create($this->validateRequest());
+        return redirect($employee->path());
     }
 
     public function update(Employee $employee)
     {
         $employee->update($this->validateRequest());
+        return redirect($employee->path());
     }
 
     public function destroy(Employee $employee)
     {
         $employee->delete();
+
+        return redirect('/employees');
     }
 
     protected function validateRequest()
