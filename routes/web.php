@@ -19,3 +19,5 @@ Route::delete(
     '/employees/{employee}',
     '\App\Http\Controllers\EmployeeController@destroy'
 );
+
+Route::post('/skills', '\App\Http\Controllers\SkillController@store');
