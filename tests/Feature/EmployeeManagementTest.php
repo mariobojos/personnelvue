@@ -6,12 +6,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Employee;
 
-class EmployeeRegistrationTest extends TestCase
+class EmployeeManagementTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function an_employee_can_be_registered()
+    public function an_employee_can_be_created()
     {
         // Remove Laravel exception handling
         $this->withoutExceptionHandling();
