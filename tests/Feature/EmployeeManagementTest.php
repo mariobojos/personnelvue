@@ -2,9 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\Employee;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Models\Employee;
 
 class EmployeeManagementTest extends TestCase
 {
@@ -39,6 +40,12 @@ class EmployeeManagementTest extends TestCase
 
         $this->assertCount(1, Employee::all());
         $response->assertRedirect('/employees/' . $employee->id);
+
+        // Check if the dates are Carbon\Carbon objects and the formats are effective
+        $this->assertInstanceof(Carbon::class, $employee->first()->dob);
+        $this->assertEquals('10/13/1983', $employee->first()->dob->format('m/d/Y'));
+        $this->assertInstanceof(Carbon::class, $employee->first()->date_hired);
+        $this->assertEquals('2018-23-11', $employee->first()->date_hired->format('Y-d-m'));
     }
 
     /** @test */
@@ -87,8 +94,10 @@ class EmployeeManagementTest extends TestCase
         $this->assertEquals('Yobomo1', $employee->lastname);
         $this->assertEquals('Hortag1', $employee->firstname);
         $this->assertEquals('Ozmo1', $employee->midname);
-        $this->assertEquals('1983-10-14', $employee->dob);
-        $this->assertEquals('2018-11-24', $employee->date_hired);
+        $this->assertInstanceOf(Carbon::class, $employee->dob);
+        $this->assertEquals('1983-10-14', $employee->dob->format('Y-m-d'));
+        $this->assertInstanceOf(Carbon::class, $employee->date_hired);
+        $this->assertEquals('2018-11-24', $employee->date_hired->format('Y-m-d'));
         $this->assertEquals(0, $employee->is_available);
         $this->assertEquals('PROBY', $employee->emp_status);
         $this->assertEquals('SINGLE', $employee->civil_status);
