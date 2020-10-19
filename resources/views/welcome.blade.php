@@ -23,6 +23,12 @@
     <body class="antialiased">
         <h1>Personnel Profiler</h1>
         <h3>by mrflbojos</h3>
+
+        <div style="margin-left: 20%;">
+            <p>Updates:</p>
+            <p>Currently creating Feature tests for the Skills and Department.</p>
+        </div>
+
         <h3>(c)
         @php
             $now = new DateTime();
