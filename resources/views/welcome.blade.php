@@ -13,14 +13,17 @@
 
         <style>
             body {
-                font-family: 'Nunito';
+                font-family: 'sans-serif', 'helvetica', 'arial';
+            }
+            h1, h2, h3, h4, h5, h6 {
+                text-align: center;
             }
         </style>
     </head>
     <body class="antialiased">
-        <h1 style="text-align: center">Personnel Profiler</h1>
-        <h3 style="text-align: center">by mrflbojos</h3>
-    <h3 style="text-align: center">(c)
+        <h1>Personnel Profiler</h1>
+        <h3>by mrflbojos</h3>
+        <h3>(c)
         @php
             $now = new DateTime();
             echo $now->format('Y')
