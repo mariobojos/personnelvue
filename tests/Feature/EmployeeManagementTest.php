@@ -11,6 +11,14 @@ class EmployeeManagementTest extends TestCase
 {
     use RefreshDatabase;
 
+
+    /** @test */
+    public function a_faker_test()
+    {
+        $employee = Employee::factory()->create();
+        $this->assertNotEmpty($employee);
+    }
+
     /** @test */
     public function an_employee_can_be_created()
     {
