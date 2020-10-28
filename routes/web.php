@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+Route::view('/', 'index');
+
 Route::post('/employees', '\App\Http\Controllers\EmployeeController@store');
 Route::patch('/employees/{employee}', '\App\Http\Controllers\EmployeeController@update');
 Route::delete(

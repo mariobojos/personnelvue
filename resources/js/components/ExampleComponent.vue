@@ -11,13 +11,33 @@
                 </div>
             </div>
         </div>
+
+        <p v-text="title"></p>
+        <input type="text" v-model="title" />
+
+        <!-- <md-field>
+            <label>Initial Value</label>
+            <md-input v-model="initial"></md-input>
+        </md-field> -->
+
+
     </div>
 </template>
 
 <script>
     export default {
+        name: 'example-component',
+
+        data: function() {
+            return {
+                title: 'Hello',
+                initial: 'Max Surban',
+            }
+        },
+
         mounted() {
             console.log('Component mounted.')
+            console.log(this.title)
         }
     }
 </script>

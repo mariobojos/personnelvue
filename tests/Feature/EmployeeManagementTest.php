@@ -2,10 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Models\Employee;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\Models\Employee;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class EmployeeManagementTest extends TestCase
 {
@@ -17,6 +18,27 @@ class EmployeeManagementTest extends TestCase
     {
         $employee = Employee::factory()->create();
         $this->assertNotEmpty($employee);
+    }
+
+    /** @test */
+    public function table_employee_has_expected_columns()
+    {
+        $this->assertTrue(
+            Schema::hasColumn('employees', 'id'),
+            1
+        );
+
+        $this->assertTrue(
+            Schema::hasColumns('employees', [
+                'id',
+                'lastname',
+                'firstname',
+                'midname',
+                'dob',
+                'date_hired'
+            ]),
+            1
+        );
     }
 
     /** @test */
