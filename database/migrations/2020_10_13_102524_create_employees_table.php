@@ -19,7 +19,7 @@ class CreateEmployeesTable extends Migration
             $table->string('firstname')->default('');
             $table->string('midname')->default('');
             $table->date('dob');
-            $table->date('date_hired')->nullable()->default('null');
+            $table->date('date_hired')->nullable();
             $table->boolean('is_available')->default(true);
             $table->enum('emp_status', ['PROBY', 'REG']);
             $table->enum('civil_status', ['SINGLE', 'MARRIED', 'LEGALLY SEPARATED', 'DIVORCED', 'WIDOW/ER']);
