@@ -3,19 +3,20 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import VueRouter from 'vue-router';
-// import { MdButton, MdCard, MdField, MdMenu, MdList, MdSnackbar } from 'vue-material/dist/components';
-// import 'vue-material/dist/vue-material.min.css'
-// import 'vue-material/dist/theme/default.css'
+import { MdButton, MdCard, MdField, MdMenu, MdList, MdSnackbar } from 'vue-material/dist/components';
+import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css'
 
 Vue.use(VueRouter);
 
-// Vue.use(MdButton);
-// Vue.use(MdCard);
-// Vue.use(MdField);
-// Vue.use(MdList);
-// Vue.use(MdMenu);
-// Vue.use(MdSnackbar);
+Vue.use(MdButton);
+Vue.use(MdCard);
+Vue.use(MdField);
+Vue.use(MdList);
+Vue.use(MdMenu);
+Vue.use(MdSnackbar);
 
+import FormValidation from './components/FormValidation.vue';
 import ExampleComponent from './components/ExampleComponent.vue';
 import MainLayout from './components/MainLayout.vue';
 import NotFound from './components/NotFound.vue';
@@ -40,6 +41,7 @@ const app = new Vue({
     el: '#app',
 
     components: {
+        FormValidation,
         ExampleComponent,
         MainLayout,
         NotFound

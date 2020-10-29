@@ -10,7 +10,7 @@
 <body>
     <div id="app">
         {{-- <example-component></example-component> --}}
-        <main-layout></main-layout>
+        <form-validation></form-validation>
     </div>
     <script src="../js/app.js"></script>
 </body>
