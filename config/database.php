@@ -69,14 +69,15 @@ return [
             ]) : [],
         ],
 
-        'testing_db' => [
+        'mysql_testing' => [
             'driver' => 'mysql',
             'host' => env('TEST_DB_HOST', 'localhost'),
+            'port' => env('DB_PORT', '3306'),
             'database' => env('TEST_DB_DATABASE', 'forge'),
             'username' => env('TEST_DB_USERNAME', 'forge'),
             'password' => env('TEST_DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
             'strict' => false,
         ],

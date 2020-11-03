@@ -4,6 +4,7 @@
             <template v-slot:header>
                 Personnel Skills Profiler
             </template>
+            <router-view></router-view>
             <personne-list></personne-list>
         </base-layout>
     </div>
@@ -12,18 +13,14 @@
 <script>
 
 import BaseLayout from './BaseLayout.vue';
-import PersonneList from './PersonnelList.vue';
+import PersonnelList from "./personnel/PersonnelList";
 
 export default {
     name: 'main-layout',
 
     components: {
         BaseLayout,
-        PersonneList
+        PersonnelList
     }
 }
 </script>
-
-<style>
-
-</style>

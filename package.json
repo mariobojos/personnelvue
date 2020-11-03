@@ -27,6 +27,8 @@
         "vuelidate": "^0.7.6"
     },
     "dependencies": {
+        "g": "^2.0.1",
+        "moment": "^2.29.1",
         "vue-router": "^3.4.8"
     }
 }

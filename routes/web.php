@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// This will override the Laravel routing with the Vue-Router
+Route::get('/{vue_capture?}', function () {
+    return view('index');
+})->where('vue_capture', '[\/\w\.-]*');
+
 Route::view('/', 'index');
 
 Route::post('/employees', '\App\Http\Controllers\EmployeeController@store');
