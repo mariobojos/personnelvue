@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Personnel Skills</title>
-    <link rel="stylesheet" href="../css/app.css">
-</head>
-<body>
-    <div id="app">
-        {{-- <example-component></example-component> --}}
-        <form-validation></form-validation>
+@extends('layout')
+
+@section('content')
+<div id="app">
+{{--    <router-link to="/" class="nav-link">Example</router-link>--}}
+{{--    <router-link to="/main" class="nav-link">Main</router-link>--}}
+{{--    <router-link to="/add" class="nav-link">Add Personnel</router-link>--}}
+    <div class="container">
+        <router-view class="col-12"></router-view>
     </div>
-    <script src="../js/app.js"></script>
-</body>
-</html>
+</div>
+<script src="../js/app.js"></script>
+@endsection
+
+

@@ -62,6 +62,7 @@
 
         <md-card-actions>
           <md-button type="submit" class="md-primary" :disabled="sending">Create user</md-button>
+          <md-button><router-link to="/" class="nav-link">Cancel</router-link></md-button>
         </md-card-actions>
       </md-card>
 
