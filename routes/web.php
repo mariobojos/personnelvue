@@ -28,7 +28,7 @@ Route::delete(
     '\App\Http\Controllers\EmployeeController@destroy'
 );
 
-Route::post('/skills', '\App\Http\Controllers\SkillController@store');
+Route::post('/skill', '\App\Http\Controllers\SkillController@store');
 
 Route::post('/departments', '\App\Http\Controllers\DepartmentController@store');
 Route::patch('/departments/{department}', '\App\Http\Controllers\DepartmentController@update');

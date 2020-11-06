@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\PersonnelResource;
 use App\Models\Personnel;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -16,7 +17,7 @@ class PersonnelController extends Controller
      */
     public function index()
     {
-        //
+        return PersonnelResource::collection(Personnel::all());
     }
 
     /**
@@ -38,7 +39,7 @@ class PersonnelController extends Controller
     public function store(Request $request)
     {
         $person = Personnel::create($this->validateRequest());
-        return $person->id;
+         return (['message' => 'Record with id ' . $person->id . ' is saved.']);
     }
 
     /**
@@ -89,20 +90,21 @@ class PersonnelController extends Controller
     protected function validateRequest()
     {
         return request()->validate([
-            'lastname' => 'required|max:40',
+            'lastname' => 'required|max:50',
             'firstname' => 'required|max:50',
-            'midname' => 'string|min:0|max:40',
+            'midname' => 'string|min:0|max:50',
             'dob' => 'required',
             'date_hired' => 'nullable|date',
             'gender' => ['required', Rule::In(['M', 'F', 'O'])],
-            'emp_status' => ['required', Rule::In(['PROBY', 'REG'])],
+            'emp_status' => ['required', Rule::In(['PRB', 'REG'])],
             'civil_status' => [
                 'required',
-                Rule::In(['SINGLE', 'MARRIED', 'SEPARATED', 'DIVORCED', 'WIDOW/ER'])
+                Rule::In(['SIN', 'MAR', 'SEP', 'DIV', 'WID'])
             ],
+            'position' => 'required|min:3|max:50',
             'department' => [
                 'required',
-                Rule::In(['IT', 'MARKETING', 'HR', 'SERVICES'])
+                Rule::In(['IT', 'MKT', 'HR', 'SVC'])
             ],
             'email' => 'required|email|max:255',
             'address1' => 'required|max:255',

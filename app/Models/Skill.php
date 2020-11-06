@@ -13,6 +13,6 @@ class Skill extends Model
 
     public function path()
     {
-        return '/skills/' . $this->id;
+        return '/skill/' . $this->id;
     }
 }

@@ -16,7 +16,7 @@ class SkillManagementTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->post('/skills', [
+        $response = $this->post('api/skills', [
             'skill' => 'PHP',
             'category' => 'TECHNICAL',
         ]);

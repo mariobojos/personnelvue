@@ -22,8 +22,8 @@ class PersonnelFactory extends Factory
      */
     public function definition()
     {
-        $departments = ['IT', 'MARKETING', 'HR', 'SERVICES'];
-        $civil_status = ['SINGLE', 'MARRIED', 'SEPARATED', 'DIVORCED', 'WIDOW/ER'];
+        $departments = ['IT', 'MKT', 'HR', 'SVC'];
+        $civil_status = ['SIN', 'MAR', 'SEP', 'DIV', 'WID'];
         $gender = ['M', 'F', 'O'];
         return [
             'lastname' => $this->faker->lastname,
@@ -34,6 +34,7 @@ class PersonnelFactory extends Factory
             'gender' => $gender[rand(0, 2)],
             'emp_status' => 'REG',
             'department' => $departments[rand(0, count($departments) - 1)],
+            'position' => $this->faker->jobTitle,
             'civil_status' => $civil_status[rand(0, count($civil_status) - 1)],
             'address1' => $this->faker->address,
             'address2' => $this->faker->country,

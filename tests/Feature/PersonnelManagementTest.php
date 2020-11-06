@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Resources\PersonnelResource;
 use Tests\TestCase;
 use App\Models\Personnel;
 use Illuminate\Support\Carbon;
@@ -25,7 +26,8 @@ class PersonnelManagementTest extends TestCase
             'date_hired' => '2018-11-23',
             'emp_status' => 'REG',
             'gender' => 'F',
-            'civil_status' => 'MARRIED',
+            'civil_status' => 'MAR',
+            'position' => 'Developer',
             'department' => 'IT',
             'address1' => 'Brgy Mabolo',
             'address2' => 'Cebu City',
@@ -37,5 +39,16 @@ class PersonnelManagementTest extends TestCase
 
         $this->assertCount(1, Personnel::all());
         $this->assertInstanceof(Carbon::class, $person->first()->date_hired);
+    }
+
+    /** @test */
+    public function a_personnel_list_can_be_retrieved()
+    {
+        $this->withoutExceptionHandling();
+
+        Personnel::factory(5)->create();
+        $people = Personnel::all();
+        $this->assertCount(5, $people);
+        $this->assertCount(5, PersonnelResource::collection($people));
     }
 }

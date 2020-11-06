@@ -22,7 +22,7 @@
 {{--            </a>--}}
 {{--            </li>--}}
 {{--            <li class="nav-item">--}}
-{{--            <a class="nav-link" href="/skills">Skills</a>--}}
+{{--            <a class="nav-link" href="/skill">Skills</a>--}}
 {{--            </li>--}}
 {{--        </ul>--}}
 {{--    </nav>--}}

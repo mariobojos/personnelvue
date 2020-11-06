@@ -1,286 +1,191 @@
-<!--<template>-->
-<!--  <div>-->
-<!--    <form novalidate class="md-layout" @submit.prevent="validatePersonnel">-->
-<!--      <md-card class="md-layout-item md-size-100 md-small-size-100">-->
-<!--        <md-card-header>-->
-<!--            <div class="md-title">Personnel-->
-<!--            </div>-->
-<!--        </md-card-header>-->
-
-<!--        <md-card-content>-->
-<!--          <div class="md-layout md-gutter">-->
-<!--            <div class="md-layout-item md-small-size-100">-->
-<!--              <md-field :class="getValidationClass('firstName')">-->
-<!--                <label for="first-name">First Name</label>-->
-<!--                <md-input name="first-name" id="first-name" autocomplete="given-name" v-model="form.firstName" :disabled="sending" />-->
-<!--                <span class="md-error" v-if="!$v.form.firstName.required">The first name is required</span>-->
-<!--                <span class="md-error" v-else-if="!$v.form.firstName.minlength">Invalid first name</span>-->
-<!--              </md-field>-->
-<!--            </div>-->
-
-<!--            <div class="md-layout-item md-small-size-100">-->
-<!--              <md-field :class="getValidationClass('lastName')">-->
-<!--                <label for="last-name">Last Name</label>-->
-<!--                <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="form.lastName" :disabled="sending" />-->
-<!--                <span class="md-error" v-if="!$v.form.lastName.required">The last name is required</span>-->
-<!--                <span class="md-error" v-else-if="!$v.form.lastName.minlength">Invalid last name</span>-->
-<!--              </md-field>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </md-card-content>-->
-
-<!--        <md-progress-bar md-mode="indeterminate" v-if="sending" />-->
-
-<!--        <md-card-actions>-->
-<!--          <md-button type="submit" class="md-primary" :disabled="sending">Create Personnel</md-button>-->
-<!--          <md-button><router-link to="/" class="nav-link">Cancel</router-link></md-button>-->
-<!--        </md-card-actions>-->
-<!--      </md-card>-->
-
-<!--      <md-snackbar :md-active.sync="userSaved">The personnel {{ lastEmployee }} was successfully saved!</md-snackbar>-->
-<!--    </form>-->
-<!--  </div>-->
-<!--</template>-->
-
-<!--<script>-->
-<!--import { validationMixin } from 'vuelidate'-->
-<!--import {-->
-<!--  required,-->
-<!--  email,-->
-<!--  minLength,-->
-<!--  maxLength-->
-<!--} from 'vuelidate/lib/validators'-->
-
-<!--export default {-->
-<!--    name: 'personnel-form',-->
-
-<!--    mixins: [ validationMixin ],-->
-
-<!--    data: () => ({-->
-<!--      form: {-->
-<!--        lastName: null,-->
-<!--        firstName: null,-->
-<!--        midName: null,-->
-<!--        gender: null,-->
-<!--        dob: null,-->
-<!--        dateHired: null,-->
-<!--        empStatus: null,-->
-<!--        civilStatus: null,-->
-<!--        department: null,-->
-<!--        address1: null,-->
-<!--        address2: null,-->
-<!--        email: null-->
-<!--      },-->
-<!--      // flag determine whether to display 'saved' message-->
-<!--      userSaved: null,-->
-<!--      // personnel name to display in 'saved' message-->
-<!--      lastEmployee: null,-->
-<!--      // flag for disabling inputs-->
-<!--      sending: null,-->
-<!--    }),-->
-
-<!--    validations: {-->
-<!--      form: {-->
-<!--        firstName: {-->
-<!--          required,-->
-<!--          minLength: minLength(3),-->
-<!--          maxLength: maxLength(50)-->
-<!--        },-->
-<!--        lastName: {-->
-<!--          required,-->
-<!--          minLength: minLength(3)-->
-<!--        },-->
-<!--        dob: {-->
-<!--          required-->
-<!--        },-->
-<!--        gender: {-->
-<!--          required-->
-<!--        },-->
-<!--        email: {-->
-<!--          required,-->
-<!--          email-->
-<!--        }-->
-<!--      }-->
-<!--    },-->
-
-<!--    methods: {-->
-<!--      getValidationClass(fieldName) {-->
-<!--        const field = this.$v.form[fieldName]-->
-
-<!--        if (field) {-->
-<!--          return {-->
-<!--            'md-field': field.$invalid && field.$dirty-->
-<!--          }-->
-<!--        }-->
-<!--      },-->
-
-<!--      validatePersonnel() {-->
-<!--        this.$v.$touch()-->
-
-<!--        if (! this.$v.$invalid) {-->
-<!--          console.log('sending Personnel')-->
-<!--          this.savePersonnel()-->
-<!--        }-->
-<!--      },-->
-
-<!--      savePersonnel() {-->
-<!--        this.sending = true-->
-
-<!--        // use axios for sending-->
-<!--      },-->
-
-<!--      clearForm() {-->
-<!--        this.$v.reset()-->
-
-<!--        this.form.lastName = null-->
-<!--        this.form.firstName = null-->
-<!--        this.form.midName = null-->
-<!--        this.form.gender = null-->
-<!--        this.form.dob = null-->
-<!--        this.form.dateHired = null-->
-<!--        this.form.empStatus = null-->
-<!--        this.form.civilStatus = null-->
-<!--        this.form.department = null-->
-<!--        this.form.address1 = null-->
-<!--        this.form.address2 = null-->
-<!--        this.form.email = null-->
-<!--      }-->
-
-<!--    } // ./methods-->
-
-<!--}-->
-<!--</script>-->
-
-
 <template>
   <div>
-    <form novalidate class="md-layout" @submit.prevent="validateUser">
-      <md-card class="md-layout-item md-size-100 md-small-size-100">
-        <md-card-header>
-          <div class="md-title">Add Personnel</div>
-        </md-card-header>
-
-        <md-card-content>
-          <div class="md-layout md-gutter">
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('firstName')">
-                <label for="first-name">First Name</label>
-                <md-input name="first-name" id="first-name" autocomplete="given-name" v-model="form.firstName" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.firstName.required">The first name is required</span>
-                <span class="md-error" v-else-if="!$v.form.firstName.minlength">Invalid first name</span>
-                <span class="md-error" v-else-if="!$v.form.firstName.maxlength">First name is at most 50 characters long.</span>
-              </md-field>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Personnel</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Create record</h6>
+        <hr>
+        <form novalidate @submit.prevent="validateData" autocomplete="off">
+          <div class="form-row mt-3">
+            <div class="form-group col-4" :class="{ 'form-group--error': $v.form.firstName.$error }">
+              <label for="firstName">First name <span class="text-danger">*</span></label>
+              <input type="text" id="firstName" class="form-control"
+                     :class="{ 'is-invalid': validationStatus($v.form.firstName) }"
+                     v-model.trim="$v.form.firstName.$model">
+              <div class="invalid-feedback" v-if="!$v.form.firstName.required">First name is required.</div>
+              <div class="invalid-feedback" v-if="!$v.form.firstName.minLength">
+                First name must have at least {{ $v.form.firstName.$params.minLength.min }} letters.
+              </div>
+              <div class="invalid-feedback" v-if="!$v.form.firstName.maxLength">
+                First name must have at most {{ $v.form.firstName.$params.maxLength.max }} letters.
+              </div>
+            </div> <!-- ./firstName -->
+            <div class="form-group col-4" :class="{ 'form-group--error': $v.form.lastName.$error }">
+              <label for="lastName">Last name <span class="text-danger">*</span></label>
+              <input type="text" id="lastName" class="form-control"
+                     :class="{ 'is-invalid': validationStatus($v.form.lastName) }"
+                     v-model.trim="$v.form.lastName.$model">
+              <div class="invalid-feedback" v-if="!$v.form.lastName.required">Last name is required.</div>
+              <div class="invalid-feedback" v-if="!$v.form.lastName.minLength">
+                Last name must have at least {{ $v.form.lastName.$params.minLength.min }} letters.
+              </div>
+              <div class="invalid-feedback" v-if="!$v.form.lastName.maxLength">
+                Last name must have at most {{ $v.form.lastName.$params.maxLength.max }} letters.
+              </div>
+            </div> <!-- ./lastName -->
+            <div class="form-group col-4" :class="{ 'form-group--error': $v.form.midName.$error }">
+              <label for="midName">Middle name</label>
+              <input type="text" id="midName" class="form-control"
+                     :class="{ 'is-invalid': validationStatus($v.form.midName) }"
+                     v-model.trim="$v.form.midName.$model">
+              <div class="invalid-feedback" v-if="!$v.form.midName.maxLength">
+                Middle name must have at most {{ $v.form.midName.$params.maxLength.max }} letters.
+              </div>
+            </div> <!-- ./midName -->
+          </div> <!-- ./form-row -->
+          <div class="form-row">
+            <div class="form-group col-4">
+              <label for="dob">Date of Birth <span class="text-danger">*</span></label>
+              <input type="text" id="dob" class="form-control"
+                     :class="{ 'is-invalid': validationStatus($v.form.dob) }"
+                     v-model.trim="$v.form.dob.$model">
+              <div class="invalid-feedback" v-if="!$v.form.dob.required">The date of birth is required.</div>
             </div>
-
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('midName')">
-                <label for="last-name">Middle Name</label>
-                <md-input name="last-name" id="mid-name" autocomplete="family-name" v-model="form.midName" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.midName.minlength">Invalid middle name</span>
-                <span class="md-error" v-else-if="!$v.form.midName.maxlength">Middle name is at most 50 characters long.</span>
-              </md-field>
+            <div class="form-group col-4">
+              <label for="gender">Gender <span class="text-danger">*</span></label>
+              <select name="gender" id="gender" class="form-control"
+                      :class="{ 'is-invalid': validationStatus($v.form.gender) }" v-model="form.gender">
+                <option></option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+                <option value="O">Other</option>
+              </select>
+              <div class="invalid-feedback" v-if="!$v.form.gender.required">The gender is
+                required.
+              </div>
             </div>
-
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('lastName')">
-                <label for="last-name">Last Name</label>
-                <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="form.lastName" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.lastName.required">The last name is required</span>
-                <span class="md-error" v-else-if="!$v.form.lastName.minlength">Invalid last name</span>
-                <span class="md-error" v-else-if="!$v.form.lastName.maxlength">Last name is at most 50 characters long.</span>
-              </md-field>
+            <div class="form-group col-4">
+              <label for="civilStatus">Civil Status <span class="text-danger">*</span></label>
+              <select name="civilStatus" id="civilStatus" class="form-control"
+                      :class="{ 'is-invalid': validationStatus($v.form.civilStatus) }" v-model="form.civilStatus">
+                <option></option>
+                <option value="SIN">Single</option>
+                <option value="MAR">Married</option>
+                <option value="SEP">Legally Separated</option>
+                <option value="DIV">Divorced</option>
+                <option value="WID">Widow/er</option>
+              </select>
+              <div class="invalid-feedback" v-if="!$v.form.civilStatus.required">The civil
+                status is required.
+              </div>
             </div>
-          </div>
-
-          <div class="md-layout md-gutter">
-            <div class="md-layout-item md-small-size-100">
-              <md-datepicker name="dob" id="dob" v-model="form.dob" md-dense :disabled="sending" :class="getValidationClass('dob')">
-                <span class="md-error">The date of birth is required.</span>
-                <label for="dob">Date of Birth</label>
-              </md-datepicker>
+          </div> <!-- ./form-row -->
+          <div class="form-row">
+            <div class="form-group col-4">
+              <label for="dateHired">Date Hired <span class="text-danger">*</span></label>
+              <input type="text" id="dateHired" class="form-control"
+                     :class="{ 'is-invalid': validationStatus($v.form.dateHired) }" v-model="form.dateHired">
+              <div class="invalid-feedback" v-if="!$v.form.dateHired.required">The date hired is required.</div>
             </div>
-
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('gender')">
-                <label for="gender">Gender</label>
-                <md-select name="gender" id="gender" v-model="form.gender" md-dense :disabled="sending">
-                  <md-option></md-option>
-                  <md-option value="M">Male</md-option>
-                  <md-option value="F">Female</md-option>
-                  <md-option value="O">Other</md-option>
-                </md-select>
-                <span class="md-error">The gender is required</span>
-              </md-field>
+            <div class="form-group col-4">
+              <label for="empStatus">Employee Status <span class="text-danger">*</span></label>
+              <select name="empStatus" id="empStatus" class="form-control"
+                      :class="{ 'is-invalid': validationStatus($v.form.empStatus) }" v-model="form.empStatus">
+                <option></option>
+                <option value="PRB">PROBATIONARY</option>
+                <option value="REG">REGULAR</option>
+              </select>
+              <div class="invalid-feedback" v-if="!$v.form.empStatus.required">The employee status is required.</div>
             </div>
-
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('civilStatus')">
-                <label for="civilStatus">Civil Status</label>
-                <md-select name="civilStatus" id="civilStatus" v-model="form.civilStatus" md-dense :disabled="sending">
-                  <md-option></md-option>
-                  <md-option value="SINGLE">Single</md-option>
-                  <md-option value="MARRIED">Married</md-option>
-                  <md-option value="SEPARATED">Legally Separated</md-option>
-                  <md-option value="DIVORCED">Divorced</md-option>
-                  <md-option value="WIDOW/ER">Widow/er</md-option>
-                </md-select>
-                <span class="md-error">The civil status is required</span>
-              </md-field>
+            <div class="form-group col-4">
+              <label for="department">Department <span class="text-danger">*</span></label>
+              <select name="department" id="department" class="form-control"
+                      :class="{ 'is-invalid': validationStatus($v.form.department) }" v-model="form.department">
+                <option></option>
+                <option value="IT">IT</option>
+                <option value="MKT">Marketing</option>
+                <option value="HR">Human Resource</option>
+                <option value="SVC">Services</option>
+              </select>
+              <div class="invalid-feedback" v-if="!$v.form.department.required">The
+                department is required.
+              </div>
             </div>
-          </div>
+          </div> <!-- ./form-row -->
+          <div class="form-row">
+            <div class="form-group col-4">
+              <label for="email">Position</label>
+              <input type="text" id="position" class="form-control"
+                     :class="{ 'is-invalid': validationStatus($v.form.position) }"
+                     v-model.trim="$v.form.position.$model">
+              <div class="invalid-feedback" v-if="!$v.form.position.required">The position is required.</div>
+              <div class="invalid-feedback" v-else-if="!$v.form.position.minLength">
+                Position must have at least {{ $v.form.position.$params.minLength.min }} letters.
+              </div>
+            </div>
+            <div class="form-group col-8">
+              <label for="email">Email</label>
+              <input type="text" id="email" class="form-control"
+                     :class="{ 'is-invalid': validationStatus($v.form.email) }"
+                     v-model.trim="$v.form.email.$model">
+              <div class="invalid-feedback" v-if="!$v.form.email.required">The email address is required.</div>
+              <div class="invalid-feedback" v-else-if="!$v.form.email.email">Invalid email.</div>
+            </div>
+          </div> <!-- /.form-row -->
 
-          <md-field :class="getValidationClass('email')">
-            <label for="email">Email</label>
-            <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email" :disabled="sending" />
-            <span class="md-error" v-if="!$v.form.email.required">The email is required</span>
-            <span class="md-error" v-else-if="!$v.form.email.email">Invalid email</span>
-          </md-field>
-        </md-card-content>
+          <div class="form-row mt-2">
+            <div class="form-group col">
+              <label for="address1">Address Line 1</label>
+              <input type="text" id="address1" class="form-control"
+                     :class="{ 'is-invalid': validationStatus($v.form.address1) }"
+                     v-model.trim="$v.form.address1.$model">
+              <div class="invalid-feedback" v-if="!$v.form.address1.required">The address is required.</div>
+            </div>
+          </div> <!-- /.form-row -->
 
-        <md-progress-bar md-mode="indeterminate" v-if="sending" />
+          <div class="form-row mt-2">
+            <div class="form-group col">
+              <label for="address2">Address Line 2</label>
+              <input type="text" id="address2" class="form-control"
+                     :class="{ 'is-invalid': validationStatus($v.form.address2) }"
+                     v-model.trim="form.address2">
+            </div>
+          </div> <!-- /.form-row -->
 
-        <md-card-actions>
-          <md-button type="submit" class="md-primary" :disabled="sending">Create user</md-button>
-          <md-button><router-link to="/" class="nav-link">Cancel</router-link></md-button>
-        </md-card-actions>
-      </md-card>
-
-      <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was saved with success!</md-snackbar>
-    </form>
+          <md-button type="submit">Create personnel</md-button>
+          <md-button>
+            <router-link to="/" class="nav-link">Cancel</router-link>
+          </md-button>
+        </form>
+      </div>
+    </div>
+    <div v-if="showSuccess">
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Record saved!</h4>
+        <p>Personnel record has been saved.</p>
+        <hr>
+        <p v-text="message"></p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate'
-import {
+import {validationMixin} from "vuelidate";
+
+const {
   required,
+  url,
   email,
-  minLength,
-  maxLength
-} from 'vuelidate/lib/validators'
+  maxLength,
+  minLength
+} = require("vuelidate/lib/validators");
 
 export default {
-  name: 'FormValidation',
+  name: "personnel-form",
+
   mixins: [validationMixin],
-  data: () => ({
-    form: {
-      firstName: null,
-      lastName: null,
-      midName: null,
-      gender: null,
-      dob: null,
-      dateHired: null,
-      empStatus: null,
-      civilStatus: null,
-      department: null,
-      address1: null,
-      address2: null,
-      email: null
-    },
-    userSaved: false,
-    sending: false,
-    lastUser: null
-  }),
+
   validations: {
     form: {
       firstName: {
@@ -299,9 +204,6 @@ export default {
       dob: {
         required
       },
-      dateHired: {
-        required
-      },
       gender: {
         required
       },
@@ -311,60 +213,114 @@ export default {
       empStatus: {
         required
       },
+      dateHired: {
+        required
+      },
       department: {
         required
+      },
+      position: {
+        required,
+        minLength: minLength(3),
       },
       email: {
         required,
         email
-      }
+      },
+      address1: {
+        required,
+      },
     }
   },
-  methods: {
-    getValidationClass (fieldName) {
-      const field = this.$v.form[fieldName]
 
-      if (field) {
-        return {
-          'md-invalid': field.$invalid && field.$dirty
-        }
+  data: () => ({
+    form: {
+      firstName: null,
+      lastName: null,
+      midName: null,
+      dob: null,
+      gender: null,
+      civilStatus: null,
+      empStatus: null,
+      dateHired: null,
+      department: null,
+      position: null,
+      email: null,
+      address1: null,
+      address2: null,
+    },
+    showSuccess: false,
+    message: ''
+  }),
+
+  methods: {
+    validationStatus: (validation) => {
+      return typeof validation === 'undefined' ? false : validation.$error
+    },
+
+    validateData() {
+      this.$v.$touch()
+      if (this.$v.$invalid) {
+        // invalid-feedback validating
+        console.log('failed firstName validation')
+      } else {
+        console.log('passed firstName validation')
+        this.saveRecord()
       }
     },
-    clearForm () {
+
+    saveRecord() {
+      axios
+        .post(
+          '/api/personnels',
+          {
+            firstname: this.form.firstName,
+            lastname: this.form.lastName,
+            midname: this.form.midName,
+            dob: this.form.dob,
+            gender: this.form.gender,
+            civil_status: this.form.civilStatus,
+            emp_status: this.form.empStatus,
+            date_hired: this.form.dateHired,
+            department: this.form.department,
+            position: this.form.position,
+            email: this.form.email,
+            address1: this.form.address1,
+            address2: this.form.address2
+          }
+        )
+        .then((response) => {
+          this.message = response.data.message
+          this.showSuccess = true
+          setTimeout(() => {
+            this.$router.push({name: 'home'})
+          }, 1300);
+        })
+        .catch((errors) => {
+          console.log(errors)
+        })
+    },
+
+    clearForm() {
       this.$v.$reset()
       this.form.firstName = null
       this.form.lastName = null
-      this.form.age = null
+      this.form.midName = null
+      this.form.dob = null
       this.form.gender = null
+      this.form.civilStatus = null
+      this.form.dateHired = null
+      this.form.empStatus = null
+      this.form.department = null
       this.form.email = null
-    },
-    saveUser () {
-      this.sending = true
-
-      // Instead of this timeout, here you can call your API
-      window.setTimeout(() => {
-        this.lastUser = `${this.form.firstName} ${this.form.lastName}`
-        this.userSaved = true
-        this.sending = false
-        this.clearForm()
-      }, 1500)
-    },
-    validateUser () {
-      this.$v.$touch()
-
-      if (!this.$v.$invalid) {
-        this.saveUser()
-      }
+      this.form.address1 = null
+      this.form.address2 = null
     }
-  }
+  },
+
 }
 </script>
 
-<style lang="scss" scoped>
-.md-progress-bar {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-}
+<style scoped>
+
 </style>

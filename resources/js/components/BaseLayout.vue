@@ -18,7 +18,7 @@
 
           <md-list-item>
             <md-icon>perm_identity</md-icon>
-            <span class="md-list-item-text"><router-link to="/add">Add Personnel</router-link></span>
+            <span class="md-list-item-text"><router-link to="/empList">Personnel</router-link></span>
           </md-list-item>
 
           <md-list-item>
@@ -28,7 +28,12 @@
 
           <md-list-item>
             <md-icon>error</md-icon>
-            <span class="md-list-item-text">Spam</span>
+            <span class="md-list-item-text"><router-link to="/emp">Employee Form</router-link></span>
+          </md-list-item>
+
+          <md-list-item>
+            <md-icon>error</md-icon>
+            <span class="md-list-item-text"><router-link to="/addSkill">Skill Form</router-link></span>
           </md-list-item>
         </md-list>
       </md-app-drawer>
@@ -36,6 +41,8 @@
       <md-app-content>
         <router-view></router-view>
 <!--        <div><slot></slot></div>-->
+        <router-link to="/add">Add Personnel</router-link>
+        <router-link to="/addSkill">Add Skill</router-link>
       </md-app-content>
     </md-app>
   </div>

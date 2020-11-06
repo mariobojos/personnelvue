@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Skill;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class SkillController extends Controller
 {
@@ -35,7 +37,8 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $skill = Skill::create($this->validateRequest());
+        return (['message' => 'Record with id ' . $skill->id . ' is saved.']);
     }
 
     /**
@@ -81,5 +84,18 @@ class SkillController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function validateRequest()
+    {
+        return request()->validate([
+            'skill' => ['required', 'max:50', 'min:3'],
+            'category' => ['required', Rule::in([
+                'TECHNICAL',
+                'ATTITUDE',
+                'FUNCTIONAL'
+            ]),
+            ]
+        ]);
     }
 }
